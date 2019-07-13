@@ -1,3 +1,4 @@
+<?php
 /*
 Copyright 2019 MinorTom <me@minortom.net>, DaJaBe
 https://go.minortom.net/doppelkopf
@@ -17,15 +18,5 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with Doppelkopf.  If not, see <https://www.gnu.org/licenses/>.
 */
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-
-ReactDOM.render(<App />, document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+error_reporting(E_ALL);
+session_start();
