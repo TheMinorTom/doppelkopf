@@ -1,5 +1,6 @@
 <!--
 Copyright 2019 MinorTom <me@minortom.net>, DaJaBe
+https://go.minortom.net/doppelkopf
 
 This file is part of Doppelkopf.
 

@@ -1,3 +1,4 @@
+<!--
 Copyright 2019 MinorTom <me@minortom.net>, DaJaBe
 https://go.minortom.net/doppelkopf
 
@@ -15,3 +16,4 @@ GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License
 along with Doppelkopf.  If not, see <https://www.gnu.org/licenses/>.
+-->
