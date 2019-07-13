@@ -1,24 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'typeface-roboto';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+
+import Button from '@material-ui/core/Button';
+
+const palette = {
+  primary: { main: '#FFC107', contrastText: '#000000' },
+  secondary: { main: '#FF6F00', contrastText: '#000000' }
+};
+const themeName = 'Amber Blaze Orange Banded Coral Shrimp';
+
+const theme = createMuiTheme({ palette, themeName });
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <ThemeProvider theme={theme}>
+        <Button color="primary">Primary</Button>
+        <Button color="secondary">Secondary</Button>
+    </ThemeProvider>
     </div>
   );
 }
