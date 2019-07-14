@@ -7,6 +7,8 @@ package doppelkopf;
 
 import java.util.Collections;
 import java.util.HashMap;
+import jdk.nashorn.internal.ir.debug.JSONWriter;
+import jdk.nashorn.internal.runtime.JSONFunctions;
 
 /**
  *
@@ -131,5 +133,10 @@ public class Game {
         J_SOLO,
         Q_SOLO;
 
+    }
+    
+    @Override
+    public String toString() {
+        new JSo
     }
 }
