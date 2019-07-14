@@ -18,7 +18,12 @@ public class Game {
     private GAME_MODE gamemode;
     private Player[] players;
     private CardStack cardsMid;
+    private int layCounter;
     public Game() {
+        System.out.println(new Integer(2).compareTo(4));
+        
+        
+        layCounter = 0;
         gamemode = GAME_MODE.NORMAL;
         cardsMid = new CardStack(this);
         cardsToIdHashMap = new HashMap<>();
@@ -38,12 +43,46 @@ public class Game {
         initPlayers(allCards);
         
         printGame();
-        
+        play();
 
     }
     
     public void play() {
+        doPlayerLay(0, 5);
+        printGame();
+        doPlayerLay(1, 5);
+        printGame();
+        doPlayerLay(2, 5);
+        printGame();
+        doPlayerLay(3, 5);
+        printGame();
+        checkEndRound();
         
+    }
+    
+    public void setAllCardsSndTrump(CardColor c) {
+        cardsToIdHashMap.forEach((id, card)->{
+            card.setSndTrump(c);
+        });
+    }
+    
+    public void checkEndRound() {
+        if(layCounter > 3) {
+            layCounter = 0;
+            Card strongestCard = cardsMid.getStrongest(); 
+            Player winnerPlayer = strongestCard.getOwner();
+            winnerPlayer.takeTricks(cardsMid);
+            System.out.println("Winnercard: " + strongestCard.getColor().toString() + "   " + strongestCard.getValue().toString());
+            setAllCardsSndTrump(null);
+        }
+    }
+    
+    public void doPlayerLay(int playerIndex, int cardIndex) {
+        Player player = players[playerIndex];
+        if(layCounter == 0) {
+            setAllCardsSndTrump(player.getCardsInHand().getCards().get(cardIndex).getColor());
+        }
+        layCounter = player.getCardsInHand().moveCardCountedTo(cardIndex, cardsMid, layCounter);
     }
 
     public void initPlayers(CardStack allCards) {
@@ -55,6 +94,9 @@ public class Game {
             }
             Collections.sort(playerInitStack.getCards());
             players[i] = new Player(playerInitStack, this);
+            for(Card currCard: players[i].getCardsInHand()) {
+                currCard.setOwner(players[i]);
+            }
             
         }
 

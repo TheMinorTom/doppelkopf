@@ -18,7 +18,15 @@ public class Player {
         tricksStack = new CardStack(game);
     }
     
+    public void takeTricks (CardStack cardsMid) {
+        cardsMid.moveAllTo(tricksStack);
+    }
+    
     public CardStack getCardsInHand() {
         return cardsInHand;
+    }
+    
+    public CardStack getTrickCards() {
+        return tricksStack;
     }
 }

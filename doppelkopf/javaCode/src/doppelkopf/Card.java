@@ -19,6 +19,9 @@ public class Card implements Comparable {
     private final Game game;
 
     private int cardStrength;
+    private int laidIndex;
+
+    private CardColor sndTrump;
 
     public Card(CardColor color, CardValue value, int id, Game game) {
         this.cardColor = color;
@@ -28,12 +31,41 @@ public class Card implements Comparable {
         this.game = game;
         cardStrength = 0;
         calcTrump();
+        laidIndex = 0;
+        sndTrump = null;
     }
 
     @Override
     public int compareTo(Object o) {
-        Card otherCard = (Card)o;
-        return otherCard.getCardStrength() - this.getCardStrength();
+        Card otherCard = (Card) o;
+        int ret;
+        if (this.isTrump && (!otherCard.isTrump)) {
+            ret = 1;
+        } else if ((!this.isTrump) && otherCard.isTrump) {
+            ret = -1;
+        } else if (this.isTrump && otherCard.isTrump) {
+            ret = otherCard.getCardStrength() - this.getCardStrength();
+            if (ret == 0) {
+                ret += otherCard.getLaidIndex() - this.getLaidIndex();
+            }
+        } else {
+            if (this.cardColor == otherCard.getColor()) {
+                ret = otherCard.getCardStrength() - this.getCardStrength();
+                if (ret == 0) {
+                    ret += otherCard.getLaidIndex() - this.getLaidIndex();
+                }
+            } else if(sndTrump == null) {
+                ret = 0;
+            }else if ((this.cardColor == sndTrump) && (otherCard.cardColor != sndTrump)) {
+                ret = 1;
+            } else if ((this.cardColor != sndTrump) && (otherCard.cardColor == sndTrump)) {
+                return -1;
+            } else {
+                ret = 0;
+            }
+
+        }
+        return ret;
     }
 
     public void calcTrump() {
@@ -81,9 +113,25 @@ public class Card implements Comparable {
     public CardValue getValue() {
         return cardValue;
     }
-    
+
     public int getCardStrength() {
         return cardStrength;
+    }
+
+    public int getLaidIndex() {
+        return laidIndex;
+    }
+
+    public void setLaidIndex(int i) {
+        laidIndex = i;
+    }
+
+    public void setSndTrump(CardColor c) {
+        sndTrump = c;
+    }
+
+    public void deleteSndTrump() {
+        sndTrump = null;
     }
 
     @Override

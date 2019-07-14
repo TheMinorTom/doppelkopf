@@ -6,6 +6,7 @@
 package doppelkopf;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -32,6 +33,12 @@ public class CardStack implements Iterable<Card>{
         return cards.iterator();
     }
     
+    public Card getStrongest() {
+        Vector<Card> sortedCards = new Vector<>(cards);
+        Collections.sort(sortedCards);
+        return sortedCards.lastElement();
+    }
+    
     public Vector<Card> getCards() {
         return cards;
     }
@@ -48,6 +55,18 @@ public class CardStack implements Iterable<Card>{
     
     public void moveCardTo(int cardIndex, CardStack otherStack) {
         otherStack.addCard(takeCard(cardIndex));
+    }
+    
+    public void moveAllTo(CardStack otherStack) {
+        otherStack.getCards().addAll(cards);
+        cards.clear();
+    }
+    
+    public int moveCardCountedTo(int cardIndex, CardStack otherStack, int counter) {
+        Card card = takeCard(cardIndex);
+        card.setLaidIndex(counter);
+        otherStack.addCard(card);
+        return (counter +1);
     }
     
     public void moveRandomCardTo(CardStack otherStack) {
