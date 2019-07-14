@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package doppelkopf;
+package doppelkopf.gameLogic;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
-import jdk.nashorn.internal.ir.debug.JSONWriter;
-import jdk.nashorn.internal.runtime.JSONFunctions;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author DavidPrivat
@@ -59,6 +62,8 @@ public class Game {
         doPlayerLay(3, 5);
         printGame();
         checkEndRound();
+        
+        System.out.println(toString());
         
     }
     
@@ -137,6 +142,16 @@ public class Game {
     
     @Override
     public String toString() {
-        new JSo
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writeValueAsString(new Serializable() {
+                public String string1 = "Hallo";
+            }
+            
+            );
+        } catch (JsonProcessingException ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 }

@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package doppelkopf;
-
+package doppelkopf.gameLogic;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
