@@ -8,6 +8,9 @@ package doppelkopf.gameLogic;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
@@ -64,6 +67,7 @@ public class Game {
         checkEndRound();
         
         System.out.println(toString());
+        
         
     }
     
@@ -144,11 +148,17 @@ public class Game {
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            return mapper.writeValueAsString(new Serializable() {
-                public String string1 = "Hallo";
-            }
             
-            );
+            File file = new File("./output.txt");
+        try {
+            FileOutputStream stream = new FileOutputStream(file);
+            mapper.writeValue(stream, this);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+            
+            return mapper.writeValueAsString(this);
         } catch (JsonProcessingException ex) {
             ex.printStackTrace();
             return null;

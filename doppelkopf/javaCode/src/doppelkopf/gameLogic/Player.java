@@ -9,8 +9,8 @@ package doppelkopf.gameLogic;
  * @author DavidPrivat
  */
 public class Player {
-    private CardStack tricksStack, cardsInHand;
-    private Game game;
+    private transient CardStack tricksStack, cardsInHand;
+    private transient Game game;
     public Player(CardStack initialStack, Game game) {
         this.game = game;
         cardsInHand = initialStack;

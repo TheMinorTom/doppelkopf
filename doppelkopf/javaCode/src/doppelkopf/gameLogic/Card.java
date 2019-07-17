@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package doppelkopf.gameLogic;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author DavidPrivat
@@ -12,7 +15,7 @@ public class Card implements Comparable {
 
     private final CardColor cardColor;
     private final CardValue cardValue;
-    private Player owner;
+
     private final int cardId;
     private boolean isTrump;
     private final Game game;
@@ -21,6 +24,9 @@ public class Card implements Comparable {
     private int laidIndex;
 
     private CardColor sndTrump;
+    
+    @JsonIgnore
+    private transient Player owner;
 
     public Card(CardColor color, CardValue value, int id, Game game) {
         this.cardColor = color;
